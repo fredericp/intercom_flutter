@@ -167,10 +167,33 @@ id unread;
     }
     NSString *companyName = call.arguments[@"company"];
     NSString *companyId = call.arguments[@"companyId"];
+
     if(companyName != (id)[NSNull null] && companyId != (id)[NSNull null]) {
         ICMCompany *company = [ICMCompany new];
         company.name = companyName;
         company.companyId = companyId;
+        // TODO FIXME compile in XCODE
+        NSDictionary *companyAttributes = call.arguments[@"companyAttributes"];
+        if (companyAttributes != (id)[NSNull null]) {
+            // TODO apply attributes
+            NSNumber *createdAt = companyAttributes[@"created_at"];
+            if(createdAt != (id)[NSNull null]) {
+                company.createdAt = [NSDate dateWithTimeIntervalSince1970: createdAt.doubleValue];
+            }
+            NSNumber *monthlySpend = companyAttributes[@"monthly_spend"];
+            if(monthlySpend != (id)[NSNull null]) {
+                company.monthlySpend = monthlySpend;
+            }
+            NSNumber *monthlySpend = companyAttributes[@"monthly_spend"];
+            if(monthlySpend != (id)[NSNull null]) {
+                company.monthlySpend = monthlySpend;
+            }
+            NSString *plan = companyAttributes[@"plan"];
+            if(plan != (id)[NSNull null]) {
+                company.plan = plan;
+            }
+            company.customAttributes = companyAttributes;
+        }
         attributes.companies = @[company];
     }
     NSDictionary *customAttributes = call.arguments[@"customAttributes"];

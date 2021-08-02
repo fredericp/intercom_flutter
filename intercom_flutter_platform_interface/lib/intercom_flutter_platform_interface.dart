@@ -64,6 +64,7 @@ abstract class IntercomFlutterPlatform extends PlatformInterface {
     int? signedUpAt,
     String? language,
     Map<String, dynamic>? customAttributes,
+    Map<String, dynamic>? companyAttributes,
   }) {
     throw UnimplementedError('updateUser() has not been implemented.');
   }

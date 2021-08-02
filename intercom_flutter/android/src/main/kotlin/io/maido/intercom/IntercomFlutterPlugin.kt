@@ -196,6 +196,7 @@ class IntercomFlutterPlugin : FlutterPlugin, MethodCallHandler, EventChannel.Str
     val company = call.argument<String>("company")
     val companyId = call.argument<String>("companyId")
     val customAttributes = call.argument<Map<String, Any?>>("customAttributes")
+    val companyAttributes = call.argument<Map<String, Any?>>("companyAttributes")
     val signedUpAt = call.argument<Any?>("signedUpAt")
     val language = call.argument<String>("language")
 
@@ -221,6 +222,19 @@ class IntercomFlutterPlugin : FlutterPlugin, MethodCallHandler, EventChannel.Str
       val icmCompany = Company.Builder()
       icmCompany.withName(company)
       icmCompany.withCompanyId(companyId)
+      if (companyAttributes != null) {
+        if (companyAttributes.has("created_at")) {
+          icmCompany.withCreatedAt(companyAttributes.get("created_at"));
+        }
+        if (companyAttributes.has("monthly_spend")) {
+          icmCompany.withMonthlySpend(companyAttributes.get("monthly_spend"));
+        }
+        if (companyAttributes.has("plan")) {
+          icmCompany.withPlan(companyAttributes.get("plan"));
+        }
+        // remove keys created_at, monthly_spend, plan?
+        icmCompany.withCustomAttributes(companyAttributes);
+      }
       userAttributes.withCompany(icmCompany.build())
     }
 

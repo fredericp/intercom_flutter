@@ -112,6 +112,7 @@ class IntercomFlutterWeb extends IntercomFlutterPlatform {
     int? signedUpAt,
     String? language,
     Map<String, dynamic>? customAttributes,
+    Map<String, dynamic>? companyAttributes,
   }) async {
     Map<String, dynamic> userAttributes = {};
 
@@ -135,7 +136,9 @@ class IntercomFlutterWeb extends IntercomFlutterPlatform {
       Map<String, dynamic> companyObj = {};
       companyObj['company_id'] = companyId;
       companyObj['name'] = company;
-
+      if (companyAttributes != null) {
+        companyObj.addAll(companyAttributes);
+      }
       userAttributes['company'] = companyObj;
     }
 

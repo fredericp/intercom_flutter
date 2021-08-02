@@ -61,18 +61,19 @@ class Intercom {
     int? signedUpAt,
     String? language,
     Map<String, dynamic>? customAttributes,
+    Map<String, dynamic>? companyAttributes,
   }) {
     return IntercomFlutterPlatform.instance.updateUser(
-      email: email,
-      name: name,
-      phone: phone,
-      company: company,
-      companyId: companyId,
-      userId: userId,
-      signedUpAt: signedUpAt,
-      language: language,
-      customAttributes: customAttributes,
-    );
+        email: email,
+        name: name,
+        phone: phone,
+        company: company,
+        companyId: companyId,
+        userId: userId,
+        signedUpAt: signedUpAt,
+        language: language,
+        customAttributes: customAttributes,
+        companyAttributes: companyAttributes);
   }
 
   static Future<void> logout() {
